@@ -2,7 +2,7 @@
 FROM python:3.10.6-slim-buster
 
 # set work directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -23,10 +23,7 @@ RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python
     ln -s /opt/poetry/bin/poetry && \
     poetry config virtualenvs.create false
 
-# copy pyproject file
-COPY ./pyproject.toml /usr/src/app/pyproject.toml
+# copy pyproject file - following command copies poetry files to working directory which is noted above. This working directory is same as the docker-compose.yml volume mounted.
+COPY pyproject.toml poetry.lock ./
 
-RUN poetry install
-
-# copy project
-COPY ./src /usr/src/app/
+RUN poetry install --no-root

@@ -5,6 +5,9 @@ description = "Use Tile38 via FastAPI"
 authors = ["Benjamin Ramser <legionaerr@googlemail.com>"]
 license = "MIT"
 
+[tool.poetry.extras]
+files = ["contributors.md"]
+
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = ">=0.110.0"
